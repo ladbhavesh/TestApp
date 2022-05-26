@@ -26,5 +26,12 @@ stage('Build') {
   }
 }
 
+stage('publish') {
+  steps {
+    sh "dotnet publish -c Release --output ${workspace}/puboutput ${workspace}/TestApp/TestApp.csproj"
+  }
+}
+
+
   }
 }
