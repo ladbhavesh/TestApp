@@ -60,11 +60,14 @@ stage('deploy') {
 
  steps {
     withCredentials([string(credentialsId: 'oc_token', variable: 'token')]) {
-            sh "oc login --token=$token"
+
+    withCredentials([string(credentialsId: 'oc_url', variable: 'oc_url')]) {
+            sh "oc login $oc_url --token=$token"
             sh "oc get pods"
             sh "oc logout"
 
         }
+     }
    
     
   }
