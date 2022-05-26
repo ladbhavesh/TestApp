@@ -32,6 +32,13 @@ stage('publish') {
   }
 }
 
+stage('dockerize') {
+  steps {
+    sh "cd  ${workspace}"
+    sh "docker build -t  testapp:${currentBuild.number} ."
+  }
+}
+
 
   }
 }
