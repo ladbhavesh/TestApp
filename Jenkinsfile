@@ -35,7 +35,9 @@ stage('publish') {
 stage('dockerize') {
   steps {
     sh "cd  ${workspace}"
-    sh "docker build -t  $user/testapp:${currentBuild.number} -t $user/testapp:latest ."
+    withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
+        sh "docker build -t  $user/testapp:${currentBuild.number} -t $user/testapp:latest ."
+    }
     
   }
 }
