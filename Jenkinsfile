@@ -45,6 +45,7 @@ stage('docker push') {
     withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh "docker tag testapp:${currentBuild.number} $user/testapp:${currentBuild.number}"
             sh "docker login -u=$user -p=$pass"
+            sh "docker push $user/testapp:${currentBuild.number}"
             sh "docker logout"
             sh "docker rmi testapp:${currentBuild.number}"
             sh "docker rmi $user/testapp:${currentBuild.number}"
