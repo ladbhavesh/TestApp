@@ -35,20 +35,21 @@ stage('publish') {
 stage('dockerize') {
   steps {
     sh "cd  ${workspace}"
-   withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
-            // the code here can access $pass and $user
-            sh "docker login -u=$user -p=$pass"
-            sh "docker logout"
-        }
+    sh "docker build -t  testapp:${currentBuild.number} ."
     
   }
 }
 
 stage('docker push') {
   steps {
-    sh "docker "
-    sh "docker build -t  testapp:${currentBuild.number} ."
-    sh "docker tag testapp:${currentBuild.number} ladbhavesh1/testapp:${currentBuild.number}"
+    withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            sh "docker tag testapp:${currentBuild.number} $user/testapp:${currentBuild.number}"
+            sh "docker login -u=$user -p=$pass"
+            sh "docker logout"
+            sh "docker rmi testapp:${currentBuild.number}"
+            sh "docker rmi $user/testapp:${currentBuild.number}"
+        }
+   
     
   }
 }
