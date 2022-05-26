@@ -1,3 +1,4 @@
+node {
 stage ('Clean workspace') {
   steps {
     cleanWs()
@@ -9,3 +10,4 @@ stage ('Git Checkout') {
       git branch: 'master', url: 'https://github.com/ladbhavesh/TestApp'
     }
   }
+}
