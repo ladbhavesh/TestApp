@@ -1,67 +1,19 @@
-﻿apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+﻿apiVersion: apps/v1
+kind: Deployment
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: '2022-05-24T19:01:11Z'
-  generation: 7
-  labels:
-    app: testapp
   name: testapp
-  namespace: demo
-  resourceVersion: '124583'
-  selfLink: /apis/apps.openshift.io/v1/namespaces/demo/deploymentconfigs/testapp
-  uid: e068b95c-db93-11ec-a0e5-0050564667cf
 spec:
-  replicas: 2
+  replicas: 1
   selector:
-    app: testapp
-    deploymentconfig: testapp
-  strategy:
-    activeDeadlineSeconds: 21600
-    resources: {}
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
-      maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
+    matchLabels:
+      app: testapp
   template:
     metadata:
-      annotations:
-        openshift.io/generated-by: OpenShiftWebConsole
-      creationTimestamp: null
       labels:
         app: testapp
-        deploymentconfig: testapp
     spec:
       containers:
-        - image: >-
-            ladbhavesh1/testapp:latest
-          imagePullPolicy: Always
-          name: testapp
-          ports:
-            - containerPort: 80
-              protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-  test: false
-  triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - testapp
-        from:
-          kind: ImageStreamTag
-          name: 'testapp:latest'
-          namespace: demo
-      type: ImageChange
-
+      - name: testapp
+        image: ladbhavesh1/testapp:latest
+        ports:
+        - containerPort: 80
