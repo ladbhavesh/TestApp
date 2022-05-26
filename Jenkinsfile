@@ -32,7 +32,7 @@ stage('publish') {
   }
 }
 
-stage('dockerize') {
+/* stage('dockerize') {
   steps {
     sh "cd  ${workspace}"
     withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
@@ -42,7 +42,7 @@ stage('dockerize') {
   }
 }
 
-stage('docker push') {
+ stage('docker push') {
   steps {
     withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh "docker login -u=$user -p=$pass"
@@ -54,6 +54,21 @@ stage('docker push') {
    
     
   }
+} */
+
+stage('deploy') {
+
+ steps {
+    withCredentials([string(credentialsId: 'oc_token', variable: 'token')]) {
+            sh "oc login --token=$otken"
+            sh "oc get pods"
+            sh "oc logout"
+
+        }
+   
+    
+  }
+
 }
 
 
