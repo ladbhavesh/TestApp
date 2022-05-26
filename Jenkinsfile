@@ -13,5 +13,18 @@ stage ('Git Checkout') {
     }
   }
 
+
+stage('Restore packages') {
+  steps {
+    sh "dotnet restore ${workspace}/TestApp.sln"
+  }
+}
+
+stage('Build') {
+  steps {
+    sh "dotnet build ${workspace}/TestApp.sln"
+  }
+}
+
   }
 }
