@@ -35,7 +35,21 @@ stage('publish') {
 stage('dockerize') {
   steps {
     sh "cd  ${workspace}"
+   withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            // the code here can access $pass and $user
+            sh "docker login -u=$user -p=$pass"
+            sh "docker logout"
+        }
+    
+  }
+}
+
+stage('docker push') {
+  steps {
+    sh "docker "
     sh "docker build -t  testapp:${currentBuild.number} ."
+    sh "docker tag testapp:${currentBuild.number} ladbhavesh1/testapp:${currentBuild.number}"
+    
   }
 }
 
