@@ -63,7 +63,7 @@ stage('deploy') {
 
     withCredentials([string(credentialsId: 'oc_url', variable: 'oc_url')]) {
             sh "oc login $oc_url --token=$token --insecure-skip-tls-verify"
-            sh "oc get pods"
+            sh "oc create ${workspace}/deployment.yaml"
             sh "oc logout"
 
         }
