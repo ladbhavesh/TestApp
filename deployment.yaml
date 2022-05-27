@@ -1,4 +1,22 @@
 ﻿apiVersion: apps/v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: testapp
+  labels:
+    app: testapp
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    name: testapp
+    targetPort: 9010
+    nodePort: 32756
+  selector:
+    app: testapp
+
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: testapp
