@@ -59,10 +59,10 @@ stage('publish') {
 stage('deploy') {
 
  steps {
-    withCredentials([string(credentialsId: 'oc_token', variable: 'token')]) {
+    withCredentials([usernamePassword(credentialsId: 'oc_cred', passwordVariable: 'password',usernameVariable: 'user')]) {
 
     withCredentials([string(credentialsId: 'oc_url', variable: 'oc_url')]) {
-            sh "oc login $oc_url --token=$token --insecure-skip-tls-verify"
+            sh "oc login $oc_url -u $user -p $password --insecure-skip-tls-verify"
             sh "oc create -f ${workspace}/deployment.yaml"
             sh "oc logout"
 
