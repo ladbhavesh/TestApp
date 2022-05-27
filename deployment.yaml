@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: testapp
-        image: ladbhavesh1/testapp:latest
+        image: ladbhavesh1/testapp:{{version_number}}
         ports:
         - containerPort: 80
       imagePullPolicy: Always   
@@ -26,7 +26,7 @@ spec:
           - testapp
         from:
           kind: ImageStreamTag
-          name: 'ladbhavesh1/testapp:latest'
+          name: 'ladbhavesh1/testapp:{{version_number}}'
           namespace: demo
       type: ImageChange
   

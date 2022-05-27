@@ -68,7 +68,9 @@ stage('deploy') {
 
     withCredentials([string(credentialsId: 'oc_url', variable: 'oc_url')]) {
             sh "oc login $oc_url -u $user -p $password --insecure-skip-tls-verify"
-            sh "oc apply -f ${workspace}/deployment.yaml"
+            sh "cat ${workspace}/deployment.yaml | sed 's/{{version_number}}/${currentBuild.number}/g' | oc apply -f - "
+
+           // sh "oc apply -f ${workspace}/deployment.yaml"
             sh "oc apply -f ${workspace}/service.yaml"
             sh "oc logout"
 
