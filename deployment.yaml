@@ -18,4 +18,16 @@ spec:
         ports:
         - containerPort: 80
       imagePullPolicy: Always   
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - testapp
+        from:
+          kind: ImageStreamTag
+          name: 'ladbhavesh1/testapp:latest'
+          namespace: demo
+      type: ImageChange
+  
 

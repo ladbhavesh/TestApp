@@ -1,6 +1,8 @@
 pipeline {
 agent any 
 stages {
+
+/*
 stage ('Clean workspace') {
   steps {
     cleanWs()
@@ -42,6 +44,8 @@ stage('publish') {
   }
 }
 
+
+
  stage('docker push') {
   steps {
     withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
@@ -56,6 +60,7 @@ stage('publish') {
   }
 } 
 
+*/
 stage('deploy') {
 
  steps {
