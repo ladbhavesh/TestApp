@@ -10,7 +10,7 @@ namespace TestApp.Controllers
         [HttpGet]
         public string Get()
         {
-            return $"Time now is {DateTime.Now} and UTC time now {DateTime.UtcNow}";
+            return $"TODAY'S Time is {DateTime.Now} and UTC time now {DateTime.UtcNow}";
         }
     }
 }
