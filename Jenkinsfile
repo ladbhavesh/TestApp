@@ -32,7 +32,7 @@ stage('publish') {
   }
 }
 
-/* stage('dockerize') {
+ stage('dockerize') {
   steps {
     sh "cd  ${workspace}"
     withCredentials([usernamePassword(credentialsId: 'docker_secret', passwordVariable: 'pass', usernameVariable: 'user')]) {
@@ -54,7 +54,7 @@ stage('publish') {
    
     
   }
-} */
+} 
 
 stage('deploy') {
 
