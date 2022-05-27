@@ -17,4 +17,5 @@ spec:
         image: ladbhavesh1/testapp:latest
         ports:
         - containerPort: 80
+      imagePullPolicy: Always   
 
