@@ -21,17 +21,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
-  name: testapp
-  labels:
-    app: testapp
+  name: testapp-service
+  namespace: demo
 spec:
-  type: NodePort
+  clusterIP: 172.30.120.253
   ports:
-  - port: 80
-    name: testapp
-    targetPort: 9010
-    nodePort: 32756
+    - port: 9090
+      protocol: TCP
+      targetPort: 80
   selector:
     app: testapp
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
