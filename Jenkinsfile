@@ -64,6 +64,7 @@ stage('deploy') {
     withCredentials([string(credentialsId: 'oc_url', variable: 'oc_url')]) {
             sh "oc login $oc_url -u $user -p $password --insecure-skip-tls-verify"
             sh "oc create -f ${workspace}/deployment.yaml"
+            sh "oc create -f ${workspace}/service.yaml"
             sh "oc logout"
 
         }
