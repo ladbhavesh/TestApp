@@ -24,7 +24,6 @@ metadata:
   name: testapp-service
   namespace: demo
 spec:
-  clusterIP: 172.30.120.253
   ports:
     - port: 9090
       protocol: TCP
