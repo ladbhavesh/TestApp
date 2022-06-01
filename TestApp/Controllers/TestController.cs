@@ -10,7 +10,7 @@ namespace TestApp.Controllers
         [HttpGet]
         public string Get()
         {
-            return $"Hello how are you? abcd";
+            return $"Hello how are you? time now is  ${DateTime.Now}";
         }
     }
 }
